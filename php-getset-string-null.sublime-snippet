@@ -1,0 +1,52 @@
+<!--
+Create getter and setter methods for a string property.
+
+=== How to Use ===
+    php-strgetset<TAB><name of your property without a $ sign>
+
+For example, if your property is called $name, you would go into your class, and type:
+    php-strgetset<TAB>name
+
+Then getName() and setName() will be created for you.
+
+After the property name you can continue to <TAB> to set the following (in order)
+    - getter/setter description, defaults to "(Get|Set) <name of your property without a $ sign>"
+    - getter return and setter param description
+    - name of class methods belong too for returns self, defaults to Self
+-->
+<snippet>
+    <content><![CDATA[
+
+/**
+ * Get ${2:${1/(.*)/$1/}}
+ *
+ * @return string|null ${3:[description]}
+ */
+public function get${1/(.*)/\u$1/}()
+{
+    return \$this->${1:property};
+}
+
+/**
+ * Set ${2:${1/(.*)/$1/}}
+ *
+ * @param  string \$${1/(.*)/$1/}=null ${3/(.*)/$1/}
+ * @return ${4:${TM_FILENAME/([0-9A-Za-z]+).*/$1/}} Returns self for fluent interface
+ */
+public function set${1/(.*)/\u$1/:[ Prop name ]}(\$${1/(.*)/$1/}=null)
+{
+    if (\$${1/(.*)/$1/}===null) {
+        \$this->${1/(.*)/$1/} = null;
+    }
+    else \$this->${1/(.*)/$1/} = (string) \$${1/(.*)/$1/};
+
+    return \$this;
+}
+]]></content>
+    <!-- Optional: Tab trigger to activate the snippet -->
+    <tabTrigger>php-strnullgetset</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>source.php</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>Create getter and setter methods</description>
+</snippet>

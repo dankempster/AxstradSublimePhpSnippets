@@ -1,0 +1,110 @@
+<!--
+Create getter and setter methods for an array property.
+
+=== How to Use ===
+    php-arrgetset<TAB><name of your property without a $ sign>
+
+For example, if your property is called $name, you would go into your class, and type:
+    php-arrgetset<TAB>name
+
+Then getName() and setName() will be created for you.
+
+After the property name you can continue to <TAB> to set the following (in order)
+    - getter/setter description, defaults to "(Get|Set) <name of your property without a $ sign>"
+    - getter return and setter param description
+    - the name of the exception to throw if parameter is not numeric, defaults to InvalidArgumentException
+    - name of class methods belong too for returns self, defaults to Self
+-->
+<snippet>
+    <content><![CDATA[
+
+/**
+ * Get all ${2:${1/(.*)/$1/}}
+ *
+ * @return array ${4:[description]}
+ */
+public function get${1/(.*)/\u$1/}s()
+{
+    return \$this->${1:property}s->toArray();
+}
+
+/**
+ * Add a ${2:${1/(.*)/$1/}}
+ *
+ * @param  ${3:Object} \$${1/(.*)/$1/} The ${3/(.*)/$1/} to add
+ * @return ${5:${TM_FILENAME/([0-9A-Za-z]+).*/$1/}} Returns self for fluent interface
+ */
+public function add${1/(.*)/\u$1/:[ Prop name ]}(${3/(.*)/$1/} \$${1/(.*)/$1/})
+{
+    if (!\$this->${1/(.*)/$1/}s->contains(\$${1/(.*)/$1/})) {
+        \$this->${1/(.*)/$1/}s->add(\$${1/(.*)/$1/});
+    }
+
+    return \$this;
+}
+
+/**
+ * Add as an array of ${3/(.*)/$1/} objects to the current collection
+ *
+ * @param  array \$${1/(.*)/$1/} An array of ${3/(.*)/$1/} objects to add to the current collection
+ * @return ${5/(.*)/$1/} Returns self for fluent interface
+ * @uses   add${1/(.*)/$1/} To add each ${3/(.*)/$1/} from <em>${1/(.*)/$1/}</em>
+ */
+public function add${1/(.*)/\u$1/:[ Prop name ]}s(array \$${1/(.*)/$1/}s)
+{
+    foreach (\$${1/(.*)/$1/}s as \$${1/(.*)/$1/}) {
+        \$this->add${1/(.*)/\u$1/:[ Prop name ]}(\$${1/(.*)/$1/});
+    }
+
+    return \$this;
+}
+
+/**
+ * Set ${2:${1/(.*)/$1/}}
+ *
+ * @param  array \$${1/(.*)/$1/}s An array of ${3/(.*)/$1/} entities
+ * @return ${5/(.*)/$1/} Returns self for fluent interface
+ * @uses   clear${1/(.*)/\u$1/}s To clear the existing collection
+ * @uses   add${1/(.*)/\u$1/}s To add <em>${1/(.*)/$1/}s</em> as the new collection
+ */
+public function set${1/(.*)/\u$1/:[ Prop name ]}s(array \$${1/(.*)/$1/}s)
+{
+    \$this->clear${1/(.*)/\u$1/}();
+    \$this->add${1/(.*)/\u$1/}s(\$${1/(.*)/$1/}s);
+
+    return \$this;
+}
+
+/**
+ * Remove a ${2:${1/(.*)/$1/}}
+ *
+ * @param  ${3/(.*)/$1/} \$${1/(.*)/$1/} The ${3/(.*)/$1/} to add
+ * @return ${5/(.*)/$1/} Returns self for fluent interface
+ */
+public function remove${1/(.*)/\u$1/:[ Prop name ]}(${3/(.*)/$1/} \$${1/(.*)/$1/})
+{
+    if (\$this->${1/(.*)/$1/}s->contains(\$${1/(.*)/$1/})) {
+        \$this->${1/(.*)/$1/}s->removeElement(\$${1/(.*)/$1/});
+    }
+
+    return \$this;
+}
+
+/**
+ * Clear all ${2:${1/(.*)/$1/}}
+ *
+ * @return ${5/(.*)/$1/} Returns self for fluent interface
+ */
+public function clear${1/(.*)/\u$1/}s()
+{
+    \$this->${1/(.*)/$1/}s->clear();
+    return \$this;
+}
+]]></content>
+    <!-- Optional: Tab trigger to activate the snippet -->
+    <tabTrigger>php-objcolgetset</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>source.php</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>Create object getter and setter methods</description>
+</snippet>

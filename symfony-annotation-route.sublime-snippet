@@ -1,0 +1,27 @@
+<!--
+Create getter and setter methods for a string property.
+
+=== How to Use ===
+    php-strgetset<TAB><name of your property without a $ sign>
+
+For example, if your property is called $name, you would go into your class, and type:
+    php-strgetset<TAB>name
+
+Then getName() and setName() will be created for you.
+
+After the property name you can continue to <TAB> to set the following (in order)
+    - getter/setter description, defaults to "(Get|Set) <name of your property without a $ sign>"
+    - getter return and setter param description
+    - name of class methods belong too for returns self, defaults to Self
+-->
+<snippet>
+    <content><![CDATA[
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+]]></content>
+    <!-- Optional: Tab trigger to activate the snippet -->
+    <tabTrigger>sym-annotat-route</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>source.php</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>@Route - Symfony 2.x</description>
+</snippet>

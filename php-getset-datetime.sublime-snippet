@@ -1,0 +1,59 @@
+<!--
+    How to Use:
+
+        php-getset<TAB><name of your property without a $ sign>
+
+        For example, if your property is called $name, you would go into your class, and type:
+
+            php-getset<TAB>name
+
+        Then getName() and setName() will be created for you.
+
+        After the property name you can continue to <TAB> to set the following (in order)
+            - getter/setter description, defaults to "(Get|Set) <name of your property without a $ sign>"
+            - getter return and setter param var type, defaults to mixed
+            - getter return and setter param description
+            - name of class methods belong too for returns self, defaults to Self
+
+-->
+<snippet>
+    <content><![CDATA[
+
+/**
+ * Get ${2:${1/(.*)/$1/}}
+ *
+ * @param  mixed \$format=null A format excepted by {@link http://www.php.net/manual/en/function.date.php date()}
+ * @return mixed              A DateTime object if <em>format</em> is NULL, a datetime string otherwise.
+ */
+public function get${1/(.*)/\u$1/}(\$format=null)
+{
+    if (!empty(\$format)) {
+        return \$this->${1:property}->format(\$format);
+    }
+    else return clone \$this->${1/(.*)/$1/};
+}
+
+/**
+ * Set ${2:${1/(.*)/$1/}}
+ *
+ * @param  mixed \$${1/(.*)/$1/} A DateTime Object or a datetime string that's excepted by
+ *                               {@link http://www.php.net/manual/en/function.date.php date()}
+ * @return ${3:${TM_FILENAME/([0-9A-Za-z]+).*/$1/}}             Returns self for fluent interface
+ */
+public function set${1/(.*)/\u$1/:[ Prop name ]}(\$${1/(.*)/$1/})
+{
+    if (\$${1/(.*)/$1/} instanceof \\DateTime) {
+        \$this->${1/(.*)/$1/} = \$${1/(.*)/$1/};
+    }
+    else \$this->${1/(.*)/$1/} = new \\DateTime((string) \$${1/(.*)/$1/});
+
+    return \$this;
+}
+]]></content>
+    <!-- Optional: Tab trigger to activate the snippet -->
+    <tabTrigger>php-datetime-getset</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>source.php</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>Create DateTime getter and setter methods</description>
+</snippet>
